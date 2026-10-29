@@ -1,0 +1,41 @@
+REWINDCHESS — WEEK 1 PROGRESS REPORT
+Period: October 29 – November 1, 2026
+Phase: Project Initialization, Planning and Conceptual Design
+
+1. OVERVIEW
+
+During the first week of the RewindChess project, our team focused on establishing a structured foundation for future development. Rather than beginning implementation prematurely, we prioritized project architecture, collaborative workflows, task allocation, and the conceptual definition of the game's distinctive mechanics. This initial organizational phase was intended to create a clear, maintainable development environment and a shared understanding of the project's direction.
+
+2. INITIAL PROJECT STRUCTURE AND VERSION CONTROL
+
+We created the initial skeleton of the C++ project, organizing its directories to provide a coherent foundation for future implementation. The proposed structure separates essential aspects of the application, including core game logic, user interface components, and visual assets. This separation is designed to support modularity, maintainability, and collaborative development as the project evolves.
+
+The initial project structure was uploaded to our GitHub repository, establishing a shared version-controlled workspace for the team. This will allow us to coordinate contributions, track modifications, and progressively integrate new features during subsequent development stages.
+
+3. WEEKLY PLANNING AND RESPONSIBILITY ALLOCATION
+
+We developed a project planning spreadsheet outlining the weekly organization of the work, expected milestones, and individual responsibilities. The spreadsheet serves as a coordination tool to clarify what each team member is expected to work on and to provide visibility into the project's progression.
+
+We also held a team meeting to discuss the project's scope, align our expectations, and distribute responsibilities. Based on this discussion, we documented the division of work in the shared planning spreadsheet. This collaborative planning session helped establish an initial workflow and a structured approach to the coming weeks.
+
+4. GAMEPLAY CONCEPT AND BRAINSTORMING
+
+A significant part of this week's work involved brainstorming and preliminary game-design discussions. We explored ways to differentiate RewindChess from conventional chess through a combination of move-reversal mechanics, timeline-related gameplay concepts, and unique piece abilities.
+
+Our current design direction is to allow players to rewind previously played moves, introducing an additional strategic dimension to conventional chess. We also began discussing how timelines might operate within the game and how their behavior could affect decision-making and gameplay. These ideas are still exploratory and will require further definition before implementation.
+
+As part of this initial ideation process, we outlined several tentative special abilities:
+
+- Pawn — Forward Capture: A pawn may be able to capture an opposing piece directly in front of it, in addition to its standard capture options.
+- Bishop — Orthogonal Step: A bishop may be able to move one square vertically or horizontally (forward, backward, left, or right), complementing its usual diagonal movement.
+- Knight — Friendly Piece Swap: Once per game, a knight may use its standard movement pattern to jump onto a square occupied by a friendly piece and exchange positions with it. For example, if a knight could normally move to a square occupied by its own bishop, the two pieces would swap squares instead of the knight being blocked.
+
+These abilities are preliminary design proposals, not finalized rules. Their exact constraints, activation conditions, and balancing implications will be evaluated during later design and development phases.
+
+5. WEEK 1 OUTCOME AND NEXT STEPS
+
+By the end of this organizational week, we had established the initial repository structure, published it to GitHub, created a weekly planning spreadsheet, held a coordination meeting, assigned responsibilities, and documented the first ideas for RewindChess's rewind, timeline, and special-ability mechanics.
+
+No functional gameplay systems have been implemented yet. The immediate next steps will be to refine the technical architecture, clarify the rules governing rewinds and timelines, evaluate the proposed special abilities, and begin implementing the project's core C++ components according to the agreed weekly plan.
+
+Overall, Week 1 provided the organizational and conceptual groundwork needed to move into development with clearer priorities, better coordination, and a shared vision for the project.
