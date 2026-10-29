@@ -1,0 +1,3 @@
+This folder will contain the project's core C++ components, 
+including the main game logic, chess rules, game state management,
+ and other essential functionalities.

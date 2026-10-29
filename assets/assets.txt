@@ -1,0 +1,2 @@
+This folder Will contain all the project's assets, 
+including fonts, images, and other visual resources.
