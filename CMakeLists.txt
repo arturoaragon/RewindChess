@@ -20,3 +20,8 @@ endif()
 # main.cpp includes the other game files, so compile only this entry point.
 add_executable(RewindChess src/main.cpp)
 target_link_libraries(RewindChess PRIVATE raylib)
+
+# Put the images and fonts next to the program.
+add_custom_command(TARGET RewindChess POST_BUILD
+    COMMAND ${CMAKE_COMMAND} -E copy_directory
+            "${CMAKE_CURRENT_SOURCE_DIR}/assets" "$<TARGET_FILE_DIR:RewindChess>/assets")

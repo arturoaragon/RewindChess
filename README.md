@@ -1,28 +1,27 @@
-# RewindChess - Week 1
+# RewindChess - version 2
 
-**Reconstructed end-of-week snapshot**, based on the proposed Excel roadmap, 20 Oct – 25 Oct 2026. Created on 4 November 2026, not an archived historical checkout or a record of work actually completed on those dates.
+**Sprint 2: Playable prototype** · 2 - 8 Nov 2026.
 
-RewindChess is a local two-player C++17 desktop chess game. This independent snapshot represents the stage "Architecture and deliverables agreed" for the application team.
+RewindChess is a local two-player chess game in C++17. This folder reconstructs a planned milestone; it is not a historical record of work completed on those dates.
 
-## Available at this stage
+## Current version status
 
-- Week 1: C++17 build and raylib architecture window; Square, Piece, Move, State and Game definitions; game and UI separated.
+- Sprint 1: Class responsibilities and dependencies are designed. Folders, working practices and scope are planned.
+- Sprint 2: Initial board, turns, basic movement, captures and blocking. Graphical prototype with mouse selection.
 
-## Structure and dependencies
+## Structure
 
-- `src/core/Types.cpp`: the classes and constants available at this stage.
-- `src/core/Game.cpp`: game coordination and the week's state/history/resource model.
-- `src/ui/App.cpp`: raylib graphics and input, kept separate from game rules.
-- `src/main.cpp`: entry point; only this file is compiled directly.
-- `updatesweek1.md`: objectives, actual changes, pending work and validation evidence.
+- `src/core/Types.cpp`: available classes and constants.
+- `src/core/Rules.cpp`: implemented movement and chess rules.
+- `src/core/Game.cpp`: game coordination and, when available, history/resources.
+- `src/ui/App.cpp`: graphics and input, separated from the engine.
+- `src/main.cpp`: entry point; the only directly compiled source file.
+- `assets/`: pieces, fonts and licenses.
+- `CMakeLists.txt`: C++17 and raylib configuration.
 
-The final architecture represents the planned Board inside `State::board`, GameState as `State`, and Timeline as `vector<State>` managed by `Game`. Week 1 defines the basic architecture; stored timelines are implemented in week 4. This follows the existing class names rather than introducing duplicate wrapper classes. All owned source remains simple `.cpp` files with methods inside classes.
+## Build and run
 
-Requirements: C++17 compiler, CMake 3.20+, Ninja, and raylib 5.5. CMake locates raylib or downloads the pinned release on first configuration. No other week's folder is needed. Source and resources are copied locally; build directories are kept outside this project.
-
-## Configure, compile and run
-
-Open PowerShell in this project's folder, beside `CMakeLists.txt`, then run:
+Requirements: a C++17 compiler, CMake, Ninja and raylib 5.5. CMake downloads the library if needed. Open PowerShell in this folder, beside `CMakeLists.txt`:
 
 ```powershell
 $buildFolder = Join-Path "..\..\RewindChess-weekly-build" (Split-Path -Leaf $PWD)
@@ -31,16 +30,18 @@ cmake --build "$buildFolder" --parallel
 & "$buildFolder\RewindChess.exe"
 ```
 
-The first line uses your current folder's name automatically. These relative paths work even if you rename the project folder; each version gets its own build directory outside the source project.
-
-For Visual Studio generators use `--config Release` on the build command and the `Release` executable subfolder. The shown commands use Ninja, as on this computer.
+The path is relative and uses the current folder name automatically. Generated files stay outside the source project, under `RewindChess-weekly-build`.
 
 ## Controls
 
-The program opens the architecture window. Close it or press Esc. No playable board is provided yet.
+Click a piece, then its destination. New game resets the match. Esc cancels the selection.
 
-## Limits and next steps
+## Limitations and next steps
 
-No initial piece placement, playable chessboard, moves, special rules, snapshots, rewinds or abilities yet.
+No king-safety checks, special rules, endings, history, rewinds, modes or powers. Pawns do not promote yet.
 
-The support-team column is context only: no website source was supplied, and no publishing, second-PC testing, team contributions, release tags or historical completion claims are fabricated. The original spreadsheet marks all statuses Not started.
+## Planning and version mapping
+
+Retains the former version2 implementation, including the basic classes from the former version1.
+
+The backlogs also include the group's planned website, documentation and QA work. This game snapshot does not certify website completion or historical activity by its owners. See [the eight sprint backlogs](../planning/Sprint_Backlogs_8_Weeks.md).

@@ -1,0 +1,6 @@
+Chessnut piece layout
+Copyright 2015 Alexis Luengas
+https://github.com/LexLuengas/chessnut-pieces
+
+Licensed under the Apache License, Version 2.0 (see LICENSE.txt).
+PNG files are transparent 1024-pixel rasterizations of the original SVG artwork.
