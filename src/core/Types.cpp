@@ -9,6 +9,7 @@ using namespace std;
 const int WHITE_PLAYER = 0, BLACK_PLAYER = 1;
 const int NO_PIECE = 0, PAWN = 1, KNIGHT = 2, BISHOP = 3, ROOK = 4, QUEEN = 5, KING = 6;
 
+// A board location; default coordinates (-1, -1) mean no square is selected.
 class Square {
 public:
     int row; // 0 = rank 8; 7 = rank 1
@@ -24,6 +25,7 @@ public:
     bool sameAs(Square other) const { return row == other.row && col == other.col; }
 };
 
+// A default Piece represents an empty square; its side is then irrelevant.
 class Piece {
 public:
     int type;
@@ -37,6 +39,7 @@ public:
     bool empty() const { return type == NO_PIECE; }
 };
 
+// Stores the endpoints of a move; Rules.cpp checks whether it is allowed.
 class Move {
 public:
     Square from;
@@ -49,8 +52,10 @@ public:
 };
 
 
+// A complete prototype position: the board and the player whose turn it is.
 class State {
 public:
+    // Each array element starts as an empty Piece.
     Piece board[8][8];
     int turn = WHITE_PLAYER;
 

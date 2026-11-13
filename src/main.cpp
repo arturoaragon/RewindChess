@@ -5,8 +5,10 @@
 
 using namespace std;
 
+// Start the graphical application and report exceptions as console errors.
 int main() {
     try {
+        // App owns input handling, drawing and the window loop.
         App app;
         return app.run();
     } catch (const exception &error) {
