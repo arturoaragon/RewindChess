@@ -1,0 +1,55 @@
+RewindChess engine checks - Sprint 2
+
+== Initial position ==
+PASS  TC-01  32 pieces on the board, 16 per side
+PASS  TC-02  Back ranks are R N B Q K B N R for both sides (queen on d-file)
+PASS  TC-03  White pawns on rank 2, black pawns on rank 7
+PASS  TC-04  Ranks 3 to 6 are empty
+PASS  TC-05  Kings start on e1 and e8, and h1 is a light square
+PASS  TC-06  White moves first and the status reads "White to move"
+PASS  TC-07  White has exactly 20 moves in the initial position
+
+== Turn switching ==
+PASS  TC-08  Black cannot move first; the move is rejected with "Illegal move."
+PASS  TC-09  A rejected move leaves the board and turn unchanged
+PASS  TC-10  After a valid white move it is Black to move
+PASS  TC-11  The error message is cleared after a valid move
+PASS  TC-12  White cannot move twice in a row
+PASS  TC-13  After a valid black move it is White to move again
+PASS  TC-14  Six alternating moves are all accepted and White is to move
+PASS  TC-15  New game restores the initial position, White to move and no error
+
+== Basic movement ==
+PASS  TC-16  Pawn moves one or two squares from its starting rank
+PASS  TC-17  Pawn cannot move three squares, sideways or backwards
+PASS  TC-18  Pawn cannot move two squares after leaving its starting rank
+PASS  TC-19  Knight jumps over pieces from the initial position
+PASS  TC-20  Knight cannot make a non-L move
+PASS  TC-21  After 1.e4 e5 the bishop, queen and king can use the opened lines
+PASS  TC-22  King moves only one square
+PASS  TC-23  Bishop cannot move in a straight line
+PASS  TC-24  Rook cannot move diagonally (custom position)
+PASS  TC-25  Queen moves in straight lines and diagonals only (custom position)
+PASS  TC-26  Perft depth 1 / 2 / 3 from the start = 20 / 400 / 8902 (standard chess values)
+
+== Blocking ==
+PASS  TC-27  Bishop, rook and queen are blocked in the initial position
+PASS  TC-28  Pawn cannot move forward into an occupied square
+PASS  TC-29  Pawn double step is blocked when the first square is occupied
+PASS  TC-30  Sliding pieces stop at the first occupied square and cannot jump
+
+== Captures ==
+PASS  TC-31  Pawn captures diagonally (1.e4 d5 2.exd5)
+PASS  TC-32  Captured piece is removed: Black has 15 pieces, White 16
+PASS  TC-33  Black recaptures with the queen (2...Qxd5)
+PASS  TC-34  Pawn cannot capture straight ahead and cannot move diagonally to an empty square
+PASS  TC-35  Pieces cannot capture their own side
+PASS  TC-36  Knight captures an enemy piece; rook captures only the first enemy piece in line
+PASS  TC-37  A king can never be captured (prototype rule)
+
+== Invalid input ==
+PASS  TC-38  Off-board squares are rejected without changing the game
+PASS  TC-39  A move to the same square is rejected
+PASS  TC-40  A move from an empty square is rejected
+
+Result: 40 passed, 0 failed

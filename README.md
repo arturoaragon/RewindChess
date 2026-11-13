@@ -40,8 +40,24 @@ Click a piece, then its destination. New game resets the match. Esc cancels the 
 
 No king-safety checks, special rules, endings, history, rewinds, modes or powers. Pawns do not promote yet.
 
+## Website, documentation and QA
+
+The support team's work lives next to the game code:
+
+- `website/`: the project website (Home, How to play, About, Download). Open `website/index.html` in a browser to preview it. See [`website/README.md`](website/README.md).
+- `docs/`: scope and requirements, classes and conventions, the prototype guide, report outlines and the sprint backlogs. Start with [`docs/requirements.md`](docs/requirements.md).
+- `qa/`: test plans, the issue log, evidence and the automated engine checks. See [`qa/README.md`](qa/README.md).
+- `weeklyInformation/sprintN-<name>.md`: each support-team member's sprint report.
+
+Run the engine checks from this folder (no raylib needed):
+
+```powershell
+g++ -std=c++17 -Wall -Wextra qa/tests/engine_checks.cpp -o engine_checks.exe
+.\engine_checks.exe
+```
+
 ## Planning and version mapping
 
 Retains the former version2 implementation, including the basic classes from the former version1.
 
-The backlogs also include the group's planned website, documentation and QA work. This game snapshot does not certify website completion or historical activity by its owners. See [the eight sprint backlogs](../planning/Sprint_Backlogs_8_Weeks.md).
+The backlogs also include the group's planned website, documentation and QA work. See [the eight sprint backlogs](docs/sprint-backlogs.md).
