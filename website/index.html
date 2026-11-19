@@ -3,11 +3,11 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>RewindChess</title>
+  <title>RewindChess – chess with a time machine</title>
   <link rel="stylesheet" href="css/style.css">
   <script src="js/site.js" defer></script>
 </head>
-<body data-page="home">
+<body data-page="home" class="home">
   <header id="site-header">
     <noscript>
       <nav class="container" aria-label="Main">
@@ -16,27 +16,96 @@
     </noscript>
   </header>
 
-  <main class="container">
-    <!-- intro -->
-    <section>
-      <h1>RewindChess</h1>
-      <p><strong>Chess with a time machine.</strong></p>
-      <p>RewindChess is a two-player chess game where you can go back to an earlier position and try another move. The original game is never lost, so you can compare both outcomes.</p>
-      <p><a href="how-to-play.html">How to play</a> · <a href="download.html">Download</a></p>
+  <main>
+    <!-- intro + history picture (rewind visual 1) -->
+    <section class="section section-dark hero">
+      <div class="container">
+        <div>
+          <p class="eyebrow">Chess with a time machine</p>
+          <h1>Every rewind opens a new timeline.</h1>
+          <p class="lead">RewindChess is a two-player chess game where you can go back to an earlier position and try another move. The original game is never lost, so you can compare both outcomes.</p>
+          <div class="btn-row">
+            <a class="btn btn-primary" href="download.html">Download</a>
+            <a class="btn btn-ghost" href="how-to-play.html">How to play</a>
+          </div>
+        </div>
+
+        <figure class="history-card">
+          <div class="label" aria-hidden="true">Your game history</div>
+          <div class="timeline-row" aria-hidden="true">
+            <span>Timeline 0</span>
+            <span class="timeline-track">
+              <span class="dot"></span><span class="link"></span>
+              <span class="dot"></span><span class="link"></span>
+              <span class="dot current"></span><span class="link"></span>
+              <span class="dot"></span><span class="link"></span>
+              <span class="dot"></span>
+            </span>
+          </div>
+          <div class="rewind-note" aria-hidden="true">&darr; rewind to move 3</div>
+          <div class="timeline-row" aria-hidden="true">
+            <span>Timeline 1</span>
+            <span class="timeline-track">
+              <span class="dot copied"></span><span class="link copied"></span>
+              <span class="dot copied"></span><span class="link copied"></span>
+              <span class="dot copied"></span><span class="link new"></span>
+              <span class="dot new"></span><span class="link new"></span>
+              <span class="dot new"></span>
+            </span>
+          </div>
+          <figcaption>A player rewinds to move 3 and plays on in Timeline 1. Dashed = moves copied from Timeline 0, amber = new moves. Timeline 0 stays as it was.</figcaption>
+        </figure>
+      </div>
     </section>
 
-    <!-- overview -->
-    <section>
-      <h2>Overview</h2>
-      <ul>
-        <li><strong>Chess for two players</strong> on one computer, with the normal chess rules.</li>
-        <li><strong>Rewinds:</strong> look at any earlier position for free, or continue from it in a new timeline. The old game stays as it was.</li>
-        <li><strong>Three game modes</strong> with a different number of rewinds per player: Practice, Competitive and Competitive + Abilities.</li>
-        <li><strong>Special abilities:</strong> in one mode, each player gets one surprise move per game.</li>
-      </ul>
-      <p>RewindChess is a desktop game for Windows, written in C++. It is being built step by step between October and December 2026, so these features are added during the project.</p>
+    <!-- modes -->
+    <section class="section">
+      <div class="container">
+        <p class="eyebrow">Game modes</p>
+        <h2>Three ways to play</h2>
+        <div class="card-grid">
+          <article class="card">
+            <h3>Practice</h3>
+            <p class="mode-stat"><strong>5</strong> rewinds per player · no abilities</p>
+            <p class="small">Explore ideas and learn from your mistakes.</p>
+          </article>
+          <article class="card">
+            <h3>Competitive</h3>
+            <p class="mode-stat"><strong>1</strong> rewind per player · no abilities</p>
+            <p class="small">One takeback. Use it wisely.</p>
+          </article>
+          <article class="card card-dark">
+            <h3>Competitive + Abilities</h3>
+            <p class="mode-stat"><strong>1</strong> rewind · <strong>1</strong> special move</p>
+            <p class="small">One surprise move per player per game.</p>
+          </article>
+        </div>
+        <p class="small more-link"><a href="how-to-play.html#modes">Compare the modes</a></p>
+      </div>
     </section>
-    <!-- TODO sprint 3: styling from the mockup (hero, mode cards, rewind steps) -->
+
+    <!-- how rewind works (rewind visual 2) -->
+    <section class="section">
+      <div class="container">
+        <p class="eyebrow">The core mechanic</p>
+        <h2>How a rewind works</h2>
+        <ol class="steps">
+          <li>
+            <h3>1. Look back</h3>
+            <p class="small">Open any earlier position or timeline. Looking is free and read-only.</p>
+          </li>
+          <li>
+            <h3>2. Continue from here</h3>
+            <p class="small">Choose to play on from that position. This uses one rewind.</p>
+          </li>
+          <li>
+            <h3>3. A new timeline</h3>
+            <p class="small">Your new moves go into a new branch. The old game is still there.</p>
+          </li>
+        </ol>
+        <p class="small more-link"><a href="how-to-play.html#rewind">All rewind rules</a></p>
+      </div>
+    </section>
   </main>
 
   <footer id="site-footer"></footer>

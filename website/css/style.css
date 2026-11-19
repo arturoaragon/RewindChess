@@ -1,67 +1,632 @@
-/* basic layout for the page structure (sprint 2)
-   TODO sprint 3: real styling + responsive from the mockup */
+/* RewindChess site styles (sprint 3)
+   colors and layout are from the mockup pdf (home + how to play)
+   phone layout is at the bottom (max-width: 720px) */
+
+:root {
+  /* colors picked from the mockup */
+  --ink: #16192a;          /* header, footer, dark card */
+  --panel: #212741;        /* history box in the hero */
+  --paper: #f5f2eb;        /* page bg */
+  --card: #fdfcf7;         /* cards + tables */
+  --amber: #e0a339;        /* buttons, accents on dark bg */
+  --amber-text: #8a5a12;   /* darker amber for text on light bg, the normal one had bad contrast */
+  --amber-mid: #ae7324;    /* 2nd bar in "how a rewind works" */
+  --text: #16192a;
+  --muted: #505364;
+  --on-dark: #f5f2eb;
+  --on-dark-muted: #c9cbd6;
+  --line: #e2ddd1;
+  --radius: 12px;
+  --font: "Segoe UI", system-ui, -apple-system, Roboto, Arial, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
 
 body {
   margin: 0;
-  font-family: Arial, Helvetica, sans-serif;
-  line-height: 1.5;
-  color: #222;
-  background: #fff;
+  font-family: var(--font);
+  font-size: 17px;
+  line-height: 1.6;
+  color: var(--text);
+  background: var(--paper);
+}
+
+a {
+  color: var(--amber-text);
+}
+
+:focus-visible {
+  outline: 3px solid var(--amber);
+  outline-offset: 2px;
+}
+
+h1, h2, h3 {
+  line-height: 1.15;
+  margin: 0 0 0.5em;
+}
+
+h1 { font-size: 3.2rem; }
+h2 { font-size: 2rem; }
+h3 { font-size: 1.15rem; }
+
+p {
+  margin: 0 0 1em;
 }
 
 .container {
-  max-width: 960px;
+  max-width: 1120px;
   margin: 0 auto;
-  padding: 0 20px;
+  padding: 0 24px;
 }
 
-/* header (filled by site.js) */
-.site-header {
-  border-bottom: 1px solid #ccc;
-  background: #f2f2f2;
+/* ===== header (filled by site.js) ===== */
+
+#site-header {
+  background: var(--ink);
+  min-height: 72px; /* keep the space so the page doesn't jump before site.js runs */
+}
+
+#site-header noscript a {
+  color: var(--on-dark);
 }
 
 .site-header .container {
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  flex-wrap: wrap;
-  padding-top: 12px;
-  padding-bottom: 12px;
+  justify-content: space-between;
+  min-height: 72px;
+  gap: 12px 32px;
 }
 
 .logo {
-  font-weight: bold;
-  font-size: 1.2em;
-  color: #222;
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: #fff;
   text-decoration: none;
 }
 
+.logo span {
+  color: var(--amber);
+}
+
 .site-nav ul {
-  list-style: none;
+  display: flex;
+  align-items: center;
+  gap: 28px;
   margin: 0;
   padding: 0;
-  display: flex;
-  gap: 20px;
+  list-style: none;
 }
 
 .site-nav a {
-  color: #222;
+  color: var(--on-dark);
+  text-decoration: none;
+}
+
+.site-nav a:hover,
+.site-nav a[aria-current="page"] {
+  color: var(--amber);
 }
 
 .site-nav a[aria-current="page"] {
-  font-weight: bold;
+  font-weight: 700;
 }
 
-main {
-  padding-top: 20px;
-  padding-bottom: 40px;
+/* Download = the yellow "Play" button from the mockup */
+.site-nav a.nav-cta {
+  background: var(--amber);
+  color: var(--ink);
+  font-weight: 700;
+  padding: 8px 18px;
+  border-radius: 8px;
 }
 
-/* footer (filled by site.js) */
+/* ===== buttons ===== */
+
+.btn {
+  display: inline-block;
+  padding: 12px 22px;
+  border-radius: 8px;
+  font-weight: 700;
+  text-decoration: none;
+  border: 2px solid transparent;
+}
+
+.btn-primary {
+  background: var(--amber);
+  color: var(--ink);
+}
+
+.btn-primary:hover {
+  background: #e9b456;
+}
+
+.btn-ghost {
+  color: var(--on-dark);
+  border-color: #4a4f68;
+}
+
+.btn-ghost:hover {
+  border-color: var(--amber);
+}
+
+.btn-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 24px;
+}
+
+/* ===== sections ===== */
+
+.section {
+  padding: 64px 0;
+}
+
+/* two light sections next to each other were too far apart */
+.section:not(.section-dark) + .section:not(.section-dark) {
+  padding-top: 8px;
+}
+
+.section-dark {
+  background: var(--ink);
+  color: var(--on-dark);
+}
+
+.eyebrow {
+  margin: 0 0 10px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--amber-text);
+}
+
+.section-dark .eyebrow {
+  color: var(--amber);
+}
+
+.lead {
+  font-size: 1.15rem;
+  color: var(--muted);
+  max-width: 62ch;
+}
+
+.section-dark .lead {
+  color: var(--on-dark-muted);
+}
+
+.page-head {
+  padding-top: 56px;
+  padding-bottom: 8px;
+}
+
+/* ===== home: hero ===== */
+
+.hero .container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 48px;
+  align-items: center;
+}
+
+.hero h1 {
+  color: #fff;
+}
+
+/* ===== rewind visual 1: "your game history" box ===== */
+
+.history-card {
+  background: var(--panel);
+  border-radius: var(--radius);
+  padding: 26px 28px;
+  margin: 0;
+}
+
+.history-card .label {
+  font-size: 0.78rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--on-dark-muted);
+  margin-bottom: 18px;
+}
+
+.timeline-row {
+  display: grid;
+  grid-template-columns: 96px 1fr;
+  align-items: center;
+  font-size: 0.9rem;
+}
+
+.timeline-track {
+  display: flex;
+  align-items: center;
+}
+
+.dot {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: #fff;
+  flex: none;
+}
+
+.dot.current {
+  width: 22px;
+  height: 22px;
+  background: var(--amber);
+  box-shadow: inset 0 0 0 4px #fff;
+}
+
+.dot.copied {
+  background: transparent;
+  border: 2px dashed var(--on-dark-muted);
+}
+
+.dot.new {
+  background: var(--amber);
+}
+
+.link {
+  flex: 1;
+  height: 2px;
+  background: #fff;
+}
+
+.link.copied {
+  height: 0;
+  background: none;
+  border-top: 2px dashed var(--on-dark-muted);
+}
+
+.link.new {
+  background: var(--amber);
+}
+
+.rewind-note {
+  margin: 10px 0 10px 96px;
+  padding-left: 30%;
+  color: var(--amber);
+  font-size: 0.85rem;
+  font-weight: 700;
+}
+
+.history-card figcaption {
+  margin-top: 18px;
+  font-size: 0.85rem;
+  color: var(--on-dark-muted);
+}
+
+/* ===== cards (modes, rewind rules) ===== */
+
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+  margin-top: 24px;
+}
+
+.card {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 22px 24px;
+}
+
+.card p:last-child {
+  margin-bottom: 0;
+}
+
+.card-dark {
+  background: var(--ink);
+  border-color: var(--ink);
+  color: var(--on-dark);
+}
+
+.card-dark h3 {
+  color: var(--amber);
+}
+
+.mode-stat {
+  margin-bottom: 6px;
+}
+
+.mode-stat strong {
+  font-size: 1.7rem;
+  color: var(--amber-text);
+  margin-right: 2px;
+}
+
+.card-dark .mode-stat strong {
+  color: var(--amber);
+}
+
+.small {
+  font-size: 0.93rem;
+  color: var(--muted);
+}
+
+.card-dark .small {
+  color: var(--on-dark-muted);
+}
+
+/* ===== rewind visual 2: three steps ===== */
+
+.steps {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+  margin: 24px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.steps li {
+  border-top: 4px solid var(--ink);
+  padding-top: 16px;
+}
+
+.steps li:nth-child(2) { border-color: var(--amber-mid); }
+.steps li:nth-child(3) { border-color: var(--amber); }
+
+/* ===== rewind visual 3: branching diagram (how to play) ===== */
+
+.diagram {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 20px 24px;
+  margin: 24px 0 0;
+}
+
+.diagram svg {
+  display: block;
+  width: 100%;
+  max-width: 720px; /* was way too big on a wide screen */
+  height: auto;
+  margin: 0 auto;
+}
+
+.diagram figcaption {
+  margin-top: 10px;
+  font-size: 0.9rem;
+  color: var(--muted);
+}
+
+.tl-label { font: 600 20px var(--font); fill: var(--text); }
+.tl-num { font: 700 17px var(--font); fill: var(--text); text-anchor: middle; }
+.tl-num.on-amber { fill: var(--ink); }
+.tl-note { font: 700 19px var(--font); fill: var(--amber-text); }
+.tl-line { stroke: var(--ink); stroke-width: 3; }
+.tl-line.copied { stroke: #8f93a6; stroke-dasharray: 6 6; }
+.tl-line.new { stroke: var(--amber); }
+.tl-dot { fill: #fff; stroke: var(--ink); stroke-width: 3; }
+.tl-dot.copied { stroke: #8f93a6; stroke-dasharray: 4 4; }
+.tl-dot.new { fill: var(--amber); stroke: var(--amber); }
+.tl-dot.picked { fill: var(--amber); stroke: var(--ink); }
+.tl-arrow { fill: none; stroke: var(--amber-text); stroke-width: 2.5; }
+.tl-arrowhead { fill: var(--amber-text); }
+.tl-note.small-note { font-size: 16px; }
+
+/* vertical version of the picture is only for phones */
+.diagram svg.narrow {
+  display: none;
+}
+
+/* ===== tables (modes table) ===== */
+
+.table-wrap {
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  overflow: hidden;
+  margin-top: 20px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background: var(--card);
+}
+
+th, td {
+  text-align: left;
+  padding: 14px 18px;
+  border-bottom: 1px solid var(--line);
+}
+
+thead th {
+  background: var(--ink);
+  color: var(--on-dark);
+}
+
+tbody tr:last-child th,
+tbody tr:last-child td {
+  border-bottom: 0;
+}
+
+/* ===== other pages ===== */
+
+.content-section {
+  padding: 28px 0;
+}
+
+.content-section .container > p {
+  max-width: 70ch;
+}
+
+.placeholder {
+  border: 2px dashed #c9c2b2;
+  border-radius: var(--radius);
+  padding: 20px 24px;
+  color: var(--muted);
+  max-width: 75ch;
+}
+
+.placeholder p:last-child {
+  margin-bottom: 0;
+}
+
+.team-list {
+  padding-left: 20px;
+}
+
+/* ===== footer (filled by site.js) ===== */
+
 .site-footer {
-  border-top: 1px solid #ccc;
-  padding: 16px 0;
-  font-size: 0.9em;
-  color: #555;
+  background: var(--ink);
+  color: var(--on-dark-muted);
+  padding: 36px 0;
+  font-size: 0.92rem;
+  margin-top: 48px;
+}
+
+.site-footer .footer-name {
+  color: #fff;
+  font-weight: 700;
+  font-size: 1.05rem;
+  margin-bottom: 6px;
+}
+
+.site-footer p {
+  margin: 0 0 4px;
+}
+
+.home .site-footer {
+  margin-top: 0;
+}
+
+/* "compare the modes" / "all rewind rules" links under sections */
+.more-link {
+  margin-top: 16px;
+}
+
+/* ===== tablet ===== */
+
+@media (max-width: 960px) {
+  .hero .container {
+    grid-template-columns: 1fr;
+  }
+
+  .card-grid,
+  .steps {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+/* ===== phone ===== */
+
+@media (max-width: 720px) {
+  body {
+    font-size: 16px;
+  }
+
+  h1 { font-size: 2.3rem; }
+  h2 { font-size: 1.6rem; }
+
+  .container {
+    padding: 0 16px;
+  }
+
+  /* logo on top, menu under it */
+  .site-header .container {
+    flex-direction: column;
+    align-items: flex-start;
+    padding-top: 12px;
+    padding-bottom: 12px;
+  }
+
+  .site-nav ul {
+    flex-wrap: wrap;
+    gap: 8px 18px;
+  }
+
+  .section {
+    padding: 40px 0;
+  }
+
+  .page-head {
+    padding-top: 36px;
+  }
+
+  .card-grid,
+  .steps {
+    grid-template-columns: 1fr;
+  }
+
+  .diagram svg.wide {
+    display: none;
+  }
+
+  .diagram svg.narrow {
+    display: block;
+    max-width: 320px;
+  }
+
+  .history-card {
+    padding: 20px;
+  }
+
+  .timeline-row {
+    grid-template-columns: 76px 1fr;
+    font-size: 0.8rem;
+  }
+
+  .rewind-note {
+    margin-left: 76px;
+    padding-left: 20%;
+  }
+
+  /* modes table: every row becomes a small card */
+  .table-wrap {
+    border: 0;
+    border-radius: 0;
+  }
+
+  .stack-table thead {
+    display: none;
+  }
+
+  .stack-table,
+  .stack-table tbody,
+  .stack-table tr,
+  .stack-table th,
+  .stack-table td {
+    display: block;
+    width: 100%;
+  }
+
+  .stack-table tr {
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    margin-bottom: 12px;
+    background: var(--card);
+    overflow: hidden;
+  }
+
+  .stack-table tbody th {
+    background: var(--ink);
+    color: var(--on-dark);
+  }
+
+  .stack-table td {
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+  }
+
+  .stack-table td::before {
+    content: attr(data-label);
+    font-weight: 700;
+    color: var(--muted);
+  }
+
+  .stack-table tbody tr:last-child td {
+    border-bottom: 1px solid var(--line);
+  }
+
+  .stack-table tbody tr td:last-child {
+    border-bottom: 0;
+  }
 }
