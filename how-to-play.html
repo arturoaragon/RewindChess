@@ -16,32 +16,128 @@
     </noscript>
   </header>
 
-  <main class="container">
-    <h1>How to play</h1>
-    <p>This page will explain the game modes, the rewind rules, the special abilities and the controls.</p>
+  <main>
+    <div class="container page-head">
+      <h1>How to play</h1>
+      <p class="lead">RewindChess uses the normal rules of chess, including check, castling, promotion and en passant. On top of that, you get rewinds and, in one mode, a special move.</p>
+    </div>
 
-    <section>
-      <h2>1. Choose a mode</h2>
-      <p>Content will be added soon.</p>
-      <!-- TODO sprint 3: game modes -->
+    <section class="content-section" id="modes">
+      <div class="container">
+        <h2>1. Choose a mode</h2>
+        <div class="table-wrap">
+          <table class="stack-table">
+            <thead>
+              <tr>
+                <th scope="col">Mode</th>
+                <th scope="col">Rewinds per player</th>
+                <th scope="col">Special moves per player</th>
+                <th scope="col">Best for</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><th scope="row">Practice</th><td data-label="Rewinds per player">5</td><td data-label="Special moves per player">0</td><td data-label="Best for">Learning and trying ideas</td></tr>
+              <tr><th scope="row">Competitive</th><td data-label="Rewinds per player">1</td><td data-label="Special moves per player">0</td><td data-label="Best for">A serious game</td></tr>
+              <tr><th scope="row">Competitive + Abilities</th><td data-label="Rewinds per player">1</td><td data-label="Special moves per player">1</td><td data-label="Best for">A game with one surprise each</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
     </section>
 
-    <section>
-      <h2>2. Rewind rules</h2>
-      <p>Content will be added soon.</p>
-      <!-- TODO sprint 3: rules + visual explanation of rewinding -->
+    <section class="content-section" id="rewind">
+      <div class="container">
+        <h2>2. Rewind rules</h2>
+        <div class="card-grid">
+          <article class="card">
+            <h3>Looking is free</h3>
+            <p class="small">Click any move in the history or any timeline to view it. You cannot move pieces while viewing.</p>
+          </article>
+          <article class="card">
+            <h3>Playing on costs one rewind</h3>
+            <p class="small">Press “Continue from here” on your turn. Going back 1 move or 20 moves costs the same: one rewind.</p>
+          </article>
+          <article class="card">
+            <h3>No refunds</h3>
+            <p class="small">A used rewind stays used, even if you go back further or switch to another timeline.</p>
+          </article>
+        </div>
+        <!-- rewind visual 3: branching picture -->
+        <figure class="diagram">
+          <svg class="wide" viewBox="0 0 640 240" role="img" aria-labelledby="branch-title branch-desc">
+            <title id="branch-title">Rewinding creates a new timeline</title>
+            <desc id="branch-desc">Timeline 0 has moves 1 to 5. The player continues from move 3. Timeline 1 starts with a copy of moves 1 to 3 and then has its own new moves 4 and 5. Timeline 0 does not change.</desc>
+
+            <text class="tl-label" x="0" y="67">Timeline 0</text>
+            <line class="tl-line" x1="170" y1="60" x2="610" y2="60"/>
+            <circle class="tl-dot" cx="170" cy="60" r="18"/><text class="tl-num" x="170" y="66">1</text>
+            <circle class="tl-dot" cx="280" cy="60" r="18"/><text class="tl-num" x="280" y="66">2</text>
+            <circle class="tl-dot picked" cx="390" cy="60" r="18"/><text class="tl-num" x="390" y="66">3</text>
+            <circle class="tl-dot" cx="500" cy="60" r="18"/><text class="tl-num" x="500" y="66">4</text>
+            <circle class="tl-dot" cx="610" cy="60" r="18"/><text class="tl-num" x="610" y="66">5</text>
+
+            <path class="tl-arrow" d="M390 82 L390 168"/>
+            <path class="tl-arrowhead" d="M382 166 L398 166 L390 179 Z"/>
+            <text class="tl-note" x="404" y="122">Continue from here</text>
+            <text class="tl-note" x="404" y="146">= 1 rewind</text>
+
+            <text class="tl-label" x="0" y="207">Timeline 1</text>
+            <line class="tl-line copied" x1="170" y1="200" x2="390" y2="200"/>
+            <line class="tl-line new" x1="390" y1="200" x2="610" y2="200"/>
+            <circle class="tl-dot copied" cx="170" cy="200" r="18"/><text class="tl-num" x="170" y="206">1</text>
+            <circle class="tl-dot copied" cx="280" cy="200" r="18"/><text class="tl-num" x="280" y="206">2</text>
+            <circle class="tl-dot copied" cx="390" cy="200" r="18"/><text class="tl-num" x="390" y="206">3</text>
+            <circle class="tl-dot new" cx="500" cy="200" r="18"/><text class="tl-num on-amber" x="500" y="206">4</text>
+            <circle class="tl-dot new" cx="610" cy="200" r="18"/><text class="tl-num on-amber" x="610" y="206">5</text>
+          </svg>
+          <!-- same picture but vertical, for phones -->
+          <svg class="narrow" viewBox="0 0 320 440" role="img" aria-labelledby="branch-title-n branch-desc-n">
+            <title id="branch-title-n">Rewinding creates a new timeline</title>
+            <desc id="branch-desc-n">Timeline 0 has moves 1 to 5. The player continues from move 3. Timeline 1 starts with a copy of moves 1 to 3 and then has its own new moves 4 and 5. Timeline 0 does not change.</desc>
+
+            <text class="tl-label" x="80" y="26" text-anchor="middle">Timeline 0</text>
+            <text class="tl-label" x="240" y="26" text-anchor="middle">Timeline 1</text>
+
+            <line class="tl-line" x1="80" y1="70" x2="80" y2="390"/>
+            <circle class="tl-dot" cx="80" cy="70" r="18"/><text class="tl-num" x="80" y="76">1</text>
+            <circle class="tl-dot" cx="80" cy="150" r="18"/><text class="tl-num" x="80" y="156">2</text>
+            <circle class="tl-dot picked" cx="80" cy="230" r="18"/><text class="tl-num" x="80" y="236">3</text>
+            <circle class="tl-dot" cx="80" cy="310" r="18"/><text class="tl-num" x="80" y="316">4</text>
+            <circle class="tl-dot" cx="80" cy="390" r="18"/><text class="tl-num" x="80" y="396">5</text>
+
+            <path class="tl-arrow" d="M102 230 L208 230"/>
+            <path class="tl-arrowhead" d="M206 222 L206 238 L219 230 Z"/>
+            <text class="tl-note small-note" x="160" y="200" text-anchor="middle">Continue</text>
+            <text class="tl-note small-note" x="160" y="218" text-anchor="middle">from here</text>
+            <text class="tl-note small-note" x="160" y="256" text-anchor="middle">= 1 rewind</text>
+
+            <line class="tl-line copied" x1="240" y1="70" x2="240" y2="230"/>
+            <line class="tl-line new" x1="240" y1="230" x2="240" y2="390"/>
+            <circle class="tl-dot copied" cx="240" cy="70" r="18"/><text class="tl-num" x="240" y="76">1</text>
+            <circle class="tl-dot copied" cx="240" cy="150" r="18"/><text class="tl-num" x="240" y="156">2</text>
+            <circle class="tl-dot copied" cx="240" cy="230" r="18"/><text class="tl-num" x="240" y="236">3</text>
+            <circle class="tl-dot new" cx="240" cy="310" r="18"/><text class="tl-num on-amber" x="240" y="316">4</text>
+            <circle class="tl-dot new" cx="240" cy="390" r="18"/><text class="tl-num on-amber" x="240" y="396">5</text>
+          </svg>
+          <figcaption>Timeline 1 starts with a copy of moves 1–3 (dashed) and continues with new moves (amber). Timeline 0 is not changed, and you can still look at it.</figcaption>
+        </figure>
+      </div>
     </section>
 
-    <section>
-      <h2>3. Special abilities</h2>
-      <p>Content will be added soon.</p>
-      <!-- TODO sprint 6: modes and abilities -->
+    <section class="content-section">
+      <div class="container">
+        <h2>3. Special abilities</h2>
+        <div class="placeholder"><p>Content will be added soon.</p></div>
+        <!-- TODO sprint 6: modes and abilities -->
+      </div>
     </section>
 
-    <section>
-      <h2>4. Controls</h2>
-      <p>Content will be added soon.</p>
-      <!-- TODO: controls from filip's guide -->
+    <section class="content-section">
+      <div class="container">
+        <h2>4. Controls</h2>
+        <div class="placeholder"><p>Content will be added soon.</p></div>
+        <!-- TODO: controls from filip's guide -->
+      </div>
     </section>
   </main>
 

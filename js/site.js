@@ -6,22 +6,34 @@
   "use strict";
 
   // menu items (same order as in the mockup, "Play" is Download for us)
+  // cta = drawn as the yellow button on the right
   var PAGES = [
     { id: "home", label: "Home", href: "index.html" },
     { id: "how-to-play", label: "How to play", href: "how-to-play.html" },
     { id: "about", label: "About", href: "about.html" },
-    { id: "download", label: "Download", href: "download.html" }
+    { id: "download", label: "Download", href: "download.html", cta: true }
+  ];
+
+  // footer team line like in the mockup
+  var TEAM = [
+    "Pedro Navarro Fernández",
+    "Arturo Aragón Bermúdez",
+    "Samuel Vidal Mariño",
+    "Ivan Yasenovskyi",
+    "Filip Sekulovski",
+    "Mladen Stamatoski"
   ];
 
   function buildHeader(current) {
     var items = PAGES.map(function (page) {
+      var cls = page.cta ? ' class="nav-cta"' : "";
       var currentAttr = page.id === current ? ' aria-current="page"' : "";
-      return '<li><a href="' + page.href + '"' + currentAttr + ">" + page.label + "</a></li>";
+      return '<li><a href="' + page.href + '"' + cls + currentAttr + ">" + page.label + "</a></li>";
     }).join("");
 
     return (
       '<div class="container">' +
-      '<a class="logo" href="index.html">RewindChess</a>' +
+      '<a class="logo" href="index.html">Rewind<span>Chess</span></a>' +
       '<nav class="site-nav" aria-label="Main"><ul>' + items + "</ul></nav>" +
       "</div>"
     );
@@ -30,7 +42,9 @@
   function buildFooter() {
     return (
       '<div class="container">' +
-      "<p>RewindChess · Software Engineering team project · Group F · 2026</p>" +
+      '<p class="footer-name">RewindChess</p>' +
+      "<p>Software Engineering team project · Group F · Oct – Dec 2026</p>" +
+      "<p>Team: " + TEAM.join(", ") + "</p>" +
       "</div>"
     );
   }
