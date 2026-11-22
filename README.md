@@ -1,6 +1,6 @@
-# RewindChess - version 2
+# RewindChess - version 4
 
-**Sprint 2: Playable prototype** · 2 - 8 Nov 2026.
+**Sprint 4: History and restoration** · 16 - 22 Nov 2026.
 
 RewindChess is a local two-player chess game in C++17. This folder reconstructs a planned milestone; it is not a historical record of work completed on those dates.
 
@@ -8,6 +8,8 @@ RewindChess is a local two-player chess game in C++17. This folder reconstructs 
 
 - Sprint 1: Class responsibilities and dependencies are designed. Folders, working practices and scope are planned.
 - Sprint 2: Initial board, turns, basic movement, captures and blocking. Graphical prototype with mouse selection.
+- Sprint 3: Check, checkmate, stalemate and king safety. Castling, en passant, all four promotions and notation.
+- Sprint 4: Complete snapshots after valid moves and vector-based history. Independent copy restoration, position keys and history-dependent draws.
 
 ## Structure
 
@@ -18,6 +20,16 @@ RewindChess is a local two-player chess game in C++17. This folder reconstructs 
 - `src/main.cpp`: entry point; the only directly compiled source file.
 - `assets/`: pieces, fonts and licenses.
 - `CMakeLists.txt`: C++17 and raylib configuration.
+
+## Run the included game
+
+Double-click `RewindChess.exe`, or run this command in PowerShell from this folder:
+
+```powershell
+.\RewindChess.exe
+```
+
+The included executable is for 64-bit Windows and needs no compiler. Keep the `assets` folder beside it.
 
 ## Build and run
 
@@ -35,29 +47,15 @@ The path is relative and uses the current folder name automatically. Generated f
 ## Controls
 
 Click a piece, then its destination. New game resets the match. Esc cancels the selection.
+When a pawn promotes, choose Queen, Rook, Bishop or Knight.
+A draw can be claimed when repetition or the 50-move rule permits it.
 
 ## Limitations and next steps
 
-No king-safety checks, special rules, endings, history, rewinds, modes or powers. Pawns do not promote yet.
-
-## Website, documentation and QA
-
-The support team's work lives next to the game code:
-
-- `website/`: the project website (Home, How to play, About, Download). Open `website/index.html` in a browser to preview it. See [`website/README.md`](website/README.md).
-- `docs/`: scope and requirements, classes and conventions, the prototype guide, report outlines and the sprint backlogs. Start with [`docs/requirements.md`](docs/requirements.md).
-- `qa/`: test plans, the issue log, evidence and the automated engine checks. See [`qa/README.md`](qa/README.md).
-- `weeklyInformation/sprintN-<name>.md`: each support-team member's sprint report.
-
-Run the engine checks from this folder (no raylib needed):
-
-```powershell
-g++ -std=c++17 -Wall -Wextra qa/tests/engine_checks.cpp -o engine_checks.exe
-.\engine_checks.exe
-```
+No history navigation, rewind action, branches, budgets or powers. Restoration is tested by constructing a separate game from a copied State.
 
 ## Planning and version mapping
 
-Retains the former version2 implementation, including the basic classes from the former version1.
+Retains the former version4. Restoration does not introduce browsing or rewinding before sprint 5.
 
-The backlogs also include the group's planned website, documentation and QA work. See [the eight sprint backlogs](docs/sprint-backlogs.md).
+The backlogs also include the group's planned website, documentation and QA work. This game snapshot does not certify website completion or historical activity by its owners. See [the eight sprint backlogs](../planning/Sprint_Backlogs_8_Weeks.md).
