@@ -4,6 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>How to play – RewindChess</title>
+  <link rel="icon" href="data:,"> <!-- no icon yet, stops the browser asking for /favicon.ico (404) -->
   <link rel="stylesheet" href="css/style.css">
   <script src="js/site.js" defer></script>
 </head>
@@ -51,7 +52,7 @@
         <div class="card-grid">
           <article class="card">
             <h3>Looking is free</h3>
-            <p class="small">Click any move in the history or any timeline to view it. You cannot move pieces while viewing.</p>
+            <p class="small">Go back through the history or switch timelines to see old positions. You cannot move pieces while viewing.</p>
           </article>
           <article class="card">
             <h3>Playing on costs one rewind</h3>
@@ -121,6 +122,36 @@
           </svg>
           <figcaption>Timeline 1 starts with a copy of moves 1–3 (dashed) and continues with new moves (amber). Timeline 0 is not changed, and you can still look at it.</figcaption>
         </figure>
+
+        <!-- rewind flow (sprint 5), same buttons as in the game (version 5) -->
+        <h3 class="flow-title">The rewind flow, step by step</h3>
+        <ol class="flow">
+          <li>
+            <span class="flow-num">1</span>
+            <h4>Live game</h4>
+            <p class="small">You play normally. The side panel shows how many rewinds each player has left.</p>
+          </li>
+          <li>
+            <span class="flow-num">2</span>
+            <h4>View mode</h4>
+            <p class="small">Go back through the history or switch to another timeline. The board shows the old position and is read-only. Nothing is spent.</p>
+          </li>
+          <li>
+            <span class="flow-num">3</span>
+            <h4>Confirm</h4>
+            <p class="small">Press “Continue from here”. A window asks “Open a new timeline?”. Press “Use rewind” to go on, or “Cancel”.</p>
+          </li>
+          <li>
+            <span class="flow-num">4</span>
+            <h4>New timeline</h4>
+            <p class="small">The moves up to that position are copied into a new timeline and the game continues there. The old timeline stays saved.</p>
+          </li>
+        </ol>
+        <ul class="flow-notes">
+          <li><strong>Changed your mind?</strong> Press “Cancel” in the window or “Back to live” to leave view mode. Nothing is spent.</li>
+          <li><strong>No rewinds left?</strong> “Continue from here” is turned off, but you can still look at the history.</li>
+          <li><strong>Who pays?</strong> The player whose turn it is in the live game.</li>
+        </ul>
       </div>
     </section>
 
