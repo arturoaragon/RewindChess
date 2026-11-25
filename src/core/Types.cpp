@@ -77,5 +77,9 @@ public:
     const Piece &at(Square square) const { return board[square.row][square.col]; }
 };
 
+class Player {
+public:
+    int rewindsUsed = 0;
+};
 
 #endif

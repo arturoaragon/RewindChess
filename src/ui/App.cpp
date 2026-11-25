@@ -14,7 +14,7 @@ class App {
 public:
     int run() {
         SetConfigFlags(FLAG_WINDOW_RESIZABLE | FLAG_MSAA_4X_HINT);
-        InitWindow(Width, Height, "RewindChess - Week 4");
+        InitWindow(Width, Height, "RewindChess - Week 5");
         if (!IsWindowReady()) throw runtime_error("Could not open the window.");
         SetExitKey(KEY_NULL);
         SetWindowMinSize(720, 540);
@@ -29,17 +29,18 @@ public:
             Vector2 mouse = GetMousePosition();
             mouse_ = {(mouse.x - offset.x) / scale, (mouse.y - offset.y) / scale};
             click_ = IsMouseButtonPressed(MOUSE_BUTTON_LEFT);
-            
+            if (IsKeyPressed(KEY_END)) { game_.backToLive(); clearSelection(); }
             BeginDrawing();
             ClearBackground(Ink);
             BeginMode2D({offset, {0, 0}, 0, scale});
             DrawRectangle(0, 0, Width, Height, Paper);
             DrawRectangle(0, 0, Width, 76, Ink);
             text("Rewind Chess", 36, 20, 32, Amber);
-            text("Week 4 / saved game states", 350, 28, 20, WHITE);
+            text("Week 5 / branching rewind", 350, 28, 20, WHITE);
             drawBoard();
             drawControls();
             if (promoting_) drawPromotion();
+            if (confirming_) drawConfirmation();
             text(notice_, 40, 710, 18, MAROON);
             EndMode2D();
             EndDrawing();
@@ -59,6 +60,7 @@ private:
     string notice_;
     bool promoting_ = false;
     Move promotion_;
+bool confirming_ = false;
 
 
     void loadAssets() {
@@ -107,6 +109,7 @@ private:
     void clearSelection() {
         selected_ = Square();
         promoting_ = false;
+confirming_ = false;
 
     }
 
@@ -117,7 +120,7 @@ private:
     }
 
     void drawBoard() {
-        const State state = game_.live();
+        const State state = game_.viewed();
         for (int row = 0; row < 8; row++) {
             for (int col = 0; col < 8; col++) {
                 Square square(row, col);
@@ -134,7 +137,7 @@ private:
                 }
             }
         }
-        if (!click_ || game_.finished() || promoting_ || !CheckCollisionPointRec(mouse_, {BoardX, BoardY, Cell * 8, Cell * 8})) return;
+        if (!click_ || game_.finished() || promoting_ || game_.previewing() || confirming_ || !CheckCollisionPointRec(mouse_, {BoardX, BoardY, Cell * 8, Cell * 8})) return;
         click_ = false;
         Square target(int((mouse_.y - BoardY) / Cell), int((mouse_.x - BoardX) / Cell));
         vector<Move> moves = game_.availableMoves();
@@ -155,12 +158,30 @@ private:
 
     void drawControls() {
         text(game_.statusText(), 640, 102, 21);
-        text("Click your piece, then its destination.", 640, 160, 18);
-        text("Castling, en passant and promotions work.", 640, 195, 17);
-        text("Saved states: " + to_string(game_.timelines()[0].size()), 640, 240, 20);
-        text("Last move: " + game_.live().moveText, 640, 276, 20);
-        if (button({640, 610, 340, 34}, "Claim draw", game_.canClaimDraw() && !promoting_)) game_.claimDraw();
-        if (button({640, 658, 340, 36}, "New game", !promoting_)) {
+        text("Five rewinds per player", 640, 154, 20);
+        text("White rewinds: " + to_string(game_.rewindsLeft(WHITE_PLAYER)), 640, 220, 19);
+        text("Black rewinds: " + to_string(game_.rewindsLeft(BLACK_PLAYER)), 640, 247, 19);
+        text("Timeline " + to_string(game_.viewedTimeline()) + " / ply " + to_string(game_.viewedState()), 640, 300, 20);
+        if (button({640, 340, 106, 34}, "Previous", !promoting_ && !confirming_ && game_.viewedState() > 0)) {
+            browse(game_.viewedTimeline(), game_.viewedState() - 1);
+        }
+        if (button({753, 340, 106, 34}, "Next", !promoting_ && !confirming_ && game_.viewedState() + 1 < int(game_.timelines()[game_.viewedTimeline()].size()))) {
+            browse(game_.viewedTimeline(), game_.viewedState() + 1);
+        }
+        if (button({866, 340, 114, 34}, "Timeline", !promoting_ && !confirming_)) {
+            int timeline = (game_.viewedTimeline() + 1) % int(game_.timelines().size());
+            browse(timeline, int(game_.timelines()[timeline].size()) - 1);
+        }
+        if (button({640, 382, 340, 34}, "Back to live", !promoting_ && !confirming_)) {
+            game_.backToLive();
+            clearSelection();
+        }
+        if (button({640, 424, 340, 34}, "Continue from here - 1 rewind", !promoting_ && !confirming_ && game_.canRewind(game_.live().turn))) {
+            confirming_ = true;
+        }
+        if (game_.previewing()) text("Read-only preview", 640, 470, 18, MAROON);
+        if (button({640, 610, 340, 34}, "Claim draw", !promoting_ && !confirming_ && game_.canClaimDraw())) game_.claimDraw();
+        if (button({640, 658, 340, 36}, "New game", !promoting_ && !confirming_)) {
             game_.newGame();
             clearSelection();
             notice_.clear();
@@ -180,6 +201,23 @@ private:
             }
         }
         text("Esc cancels", 248, 425, 18);
+    }
+
+    void browse(int timeline, int state) {
+        if (game_.preview(timeline, state)) clearSelection();
+    }
+
+    void drawConfirmation() {
+        DrawRectangle(0, 76, Width, Height - 76, Fade(Ink, 0.65f));
+        DrawRectangle(220, 245, 585, 250, Paper);
+        text("Open a new timeline?", 245, 270, 28);
+        text(sideName(game_.live().turn) + " spends one rewind.", 245, 320, 22);
+        text("The original timeline stays saved.", 245, 355, 20);
+        if (button({245, 412, 260, 45}, "Use rewind")) {
+            if (!game_.rewind(game_.live().turn)) notice_ = game_.error();
+            clearSelection();
+        }
+        if (button({520, 412, 260, 45}, "Cancel")) confirming_ = false;
     }
 
 };
