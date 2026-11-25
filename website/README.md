@@ -34,6 +34,8 @@ Every page has an empty `<header id="site-header">` and `<footer id="site-footer
 
 ## Publishing
 
+Staging preview: **https://arturoaragon.github.io/RewindChess/**
+
 The site is published with GitHub Pages from the `gh-pages` branch. How it works and the commands are in [`docs/website-hosting.md`](../docs/website-hosting.md).
 
 ## Open it

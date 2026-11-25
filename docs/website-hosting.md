@@ -75,6 +75,33 @@ The `gh-pages` branch has to exist first, so Ivan publishes once before Arturo d
 - The full user guide stays in `docs/` (Filip). The website shows only the short version and links to the guide, so the text is written once.
 - The sections are already prepared on the pages (`download.html#windows`, `download.html#install`, `how-to-play.html` section 4), so the content can be dropped in later.
 
+## 4. Staging preview (Sprint 5)
+
+Staging address: **https://arturoaragon.github.io/RewindChess/**
+
+1. Ivan publishes `website/` to the `gh-pages` branch with the commands in section 1.
+2. Arturo chooses `gh-pages` / root in Settings → Pages (once).
+3. The team opens the address and checks the site before it is final. Every later website change is published with the same commands.
+
+### Navigation and link check
+
+Before publishing, the site was served locally under the same path as GitHub Pages (`/RewindChess/`) and every page was opened at desktop (1280 px) and phone (390 px) width.
+
+| Check | Result |
+|---|---|
+| `/RewindChess/` opens the Home page | OK |
+| All 4 pages load, with styles and the shared header and footer | OK |
+| Current page is marked in the menu on every page | OK |
+| All links between the pages and the anchors (`#modes`, `#rewind`) work | OK, 6 link targets checked |
+| Errors in the browser console | One 404: the browser asked for `/favicon.ico`. Fixed with `<link rel="icon" href="data:,">` in every page; checked again, no errors. |
+
+After the site is online, the same check is done once on the real address:
+
+- [ ] `https://arturoaragon.github.io/RewindChess/` opens Home
+- [ ] Menu works on all 4 pages
+- [ ] "Compare the modes" and "All rewind rules" open the right part of How to play
+- [ ] Phone view checked on a real phone
+
 ## Sources
 
 - GitHub Docs – [Configuring a publishing source for your GitHub Pages site](https://docs.github.com/en/pages/getting-started-with-github-pages/configuring-a-publishing-source-for-your-github-pages-site)
