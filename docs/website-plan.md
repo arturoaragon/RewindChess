@@ -66,5 +66,5 @@ The website only uses files inside `website/`, so the folder can be published on
 
 ## 4. Future publishing
 
-- The website will be published with **GitHub Pages** and get an address with **DuckDNS**. The exact configuration is prepared in Sprint 4.
+- The website will be published with **GitHub Pages** and get an address with **DuckDNS**. The configuration and the review of this flow are in [`website-hosting.md`](website-hosting.md) (Sprint 4).
 - The game download will link to a **GitHub Release** (Sprints 7–8).

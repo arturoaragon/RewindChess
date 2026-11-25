@@ -32,6 +32,10 @@ Every page has an empty `<header id="site-header">` and `<footer id="site-footer
 - For amber text on the light background use `--amber-text` (the button amber is too light for text).
 - Phone layout is in the `@media (max-width: 720px)` block at the end: menu under the logo, cards in one column, the modes table becomes one card per mode, and the branch picture on How to play switches to the vertical version.
 
+## Publishing
+
+The site is published with GitHub Pages from the `gh-pages` branch. How it works and the commands are in [`docs/website-hosting.md`](../docs/website-hosting.md).
+
 ## Open it
 
 Double-click `website/index.html`. It works without a server.
