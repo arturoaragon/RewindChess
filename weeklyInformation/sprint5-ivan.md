@@ -12,9 +12,9 @@
 
 ## Staging checklist
 
-- [ ] Arturo set **Settings → Pages → Deploy from a branch → `gh-pages` / root**
-- [ ] Site opens at `https://arturoaragon.github.io/RewindChess/`
-- [ ] Link check repeated on the real address (list in `docs/website-hosting.md` §4)
+- [+] Arturo set **Settings → Pages → Deploy from a branch → `gh-pages` / root**
+- [+] Site opens at `https://arturoaragon.github.io/RewindChess/`
+- [+] Link check repeated on the real address (list in `docs/website-hosting.md` §4)
 
 ## Next sprint (Sprint 6, 30 Nov – 6 Dec)
 
