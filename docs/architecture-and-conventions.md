@@ -82,3 +82,31 @@ The Week 1 plan named `Board`, `Piece`, `Move`, `GameState` and `Timeline`. The 
 | Pull requests | Every change to `main` goes through a pull request reviewed by one other member (see `qa/qa-process.md`). |
 | Build output | Outside the repository (`..\..\RewindChess-weekly-build`). |
 | Docs | Markdown, English, dates as "12 Nov 2026". |
+
+---
+
+## Sprint 4 Update: Implemented Classes & State Restoration
+
+### Core Data Structures (`src/core/Types.cpp`)
+- **`Square`:** Stores `int row` (`0` = Rank 8, `7` = Rank 1) and `int col` (`0` = File `a`, `7` = File `h`), with `valid()` and `sameAs()` helpers.
+- **`Piece`:** Stores `int type` (`NO_PIECE=0`, `PAWN=1`, `KNIGHT=2`, `BISHOP=3`, `ROOK=4`, `QUEEN=5`, `KING=6`) and `int side` (`WHITE_PLAYER=0`, `BLACK_PLAYER=1`).
+- **`Move`:** Stores `Square from`, `Square to`, and `int promotion`.
+- **`CastlingRights`:** Stores `bool kingSide[2]` and `bool queenSide[2]` indexed by player side.
+- **`Player`:** Stores `int rewindsUsed = 0`. Kept outside `State` so session resource usage persists across all timeline branches.
+
+### Fields Stored in `State` (`src/core/Types.cpp`)
+Every valid move produces a self-contained `State` snapshot containing:
+1. `Piece board[8][8]` — Full 64-square piece placement array.
+2. `int turn` — Side to move (`WHITE_PLAYER` or `BLACK_PLAYER`).
+3. `CastlingRights castling` — Remaining kingside and queenside castling flags for both players.
+4. `Square enPassant` — Target capture square for en passant (invalid `Square(-1, -1)` when unavailable).
+5. `int halfmoveClock` — Plies elapsed since the last pawn move or capture (used for 50-move claim and 75-move automatic draw).
+6. `int fullmoveNumber` — Full turn counter starting at `1` and incrementing after Black's move.
+7. `Move lastMove` — The move that produced this state.
+8. `string moveText` — Standard algebraic notation string (e.g., `"Start"`, `"e4"`, `"Nf3+"`, `"Qh7#"`).
+9. `string repetitionKey` — Serialized position key (`getPositionKey(state)`) used to detect threefold and fivefold repetition.
+
+### Snapshots & Restoration (`src/core/Game.cpp`)
+- **History Storage:** `Game` stores all timelines in `vector<vector<State>> timelines_`, paired with `parentTimelineIds_` and `forkStateIndices_` to track where each branch forked.
+- **Snapshot Creation:** On every valid `play(move)`, `applyMove(live(), move)` computes the next `State`, assigns `moveText` and `repetitionKey`, and appends it to `timelines_[activeTimeline_]`.
+- **State Restoration:** Because `State` contains no external pointers, copying `timelines_[viewedTimeline_][0..viewedState_]` into a new `vector<State>` restores a completely independent game state (board, turn, castling rights, en passant target, clocks, and repetition history).
